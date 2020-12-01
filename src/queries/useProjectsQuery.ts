@@ -2,19 +2,21 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { Project } from '../types';
 
 export type QueryResponse = {
-  contentfulAbout: {
-    projects: {
-      id: string;
-      name: string;
-      description: string;
-      homepage: string;
-      repository: string;
-      publishedDate: string;
-      type: string;
-      logo: {
-        title: string;
-        image: {
-          src: string;
+  allContentfulProject: {
+    edges: {
+      node: {
+        id: string;
+        name: string;
+        description: string;
+        homepage: string;
+        repository: string;
+        publishedDate: string;
+        type: string;
+        logo: {
+          // title: string;
+          image: {
+            src: string;
+          };
         };
       };
     }[];
@@ -22,33 +24,37 @@ export type QueryResponse = {
 };
 
 export const useProjectsQuery = (): Project[] => {
-  const { contentfulAbout } = useStaticQuery<QueryResponse>(graphql`
+  const { allContentfulProject } = useStaticQuery<QueryResponse>(graphql`
     query ProjectsQuery {
-      contentfulAbout {
-        projects {
-          id
-          name
-          description
-          homepage: projectUrl
-          repository: repositoryUrl
-          publishedDate(formatString: "YYYY")
-          type
-          logo {
-            title
-            image: resize(width: 200, quality: 100) {
-              src
+      allContentfulProject {
+        edges {
+          node {
+            id
+            name
+            description
+            publishedDate(formatString: "YYYY")
+            logo {
+              image: resize(width: 200, quality: 100) {
+                src
+              }
             }
+            type
+            homepage: projectUrl
+            repository: repositoryUrl
           }
         }
       }
     }
   `);
 
-  return contentfulAbout.projects.map(({ logo, ...rest }) => ({
-    ...rest,
-    logo: {
-      alt: logo.title,
-      src: logo.image.src,
-    },
-  }));
+  return allContentfulProject.edges
+    .filter((value) => value.node.name !== null)
+    .map((value) => ({
+      ...value.node,
+      logo: {
+        // alt: logo.title,
+        src: value.node.logo.image ? value.node.logo.image.src : '',
+      },
+    }));
+    
 };

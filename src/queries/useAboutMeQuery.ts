@@ -29,7 +29,6 @@ export const useAboutMeQuery = (): AboutMe => {
           }
         }
         profile {
-          title
           image: resize(width: 450, quality: 100) {
             src
           }
@@ -41,7 +40,7 @@ export const useAboutMeQuery = (): AboutMe => {
   return {
     markdown: aboutMe.childMarkdownRemark.rawMarkdownBody,
     profile: {
-      alt: profile.title,
+      // alt: profile.title,
       src: profile.image.src,
     },
   };
