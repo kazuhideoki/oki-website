@@ -23,7 +23,7 @@ const LandingPage = () => {
         fontSize={[6, 7]}
         mb={[3, 4, 5]}
       >
-        {`Hello, I'm ${name}!`}
+        {`こんにちは, I'm ${name}!`}
       </Heading>
 
       <Heading
