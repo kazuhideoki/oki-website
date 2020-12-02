@@ -37,7 +37,7 @@ export default function Writing(props: Props) {
           </Fade>
         </CardContainer>
       </Section.Container>
-      {props.title}
+      {props.qiitaArticles ? props.qiitaArticles[0].title : ''}
       {/* <Section.Container id="qiita" Background={Background}>
         <Section.Header name="qiita" icon="✍️" label="qiita" />
         <CardContainer minWidth="300px">
