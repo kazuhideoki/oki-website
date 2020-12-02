@@ -15,15 +15,16 @@ const Footer = () => {
       <FooterContainer>
         <Fade direction="left" triggerOnce>
           <TextWrapper fontSize={[2, 3]}>
-            <span>{`${name} Portfolio - Powered by `}</span>
-            <Link href={GATSBY_URL}>Gatsby</Link>
+            <span>{`${name} Portfolio`}</span>
+            {/* <span>{`${name} Portfolio - Powered by `}</span> */}
+            {/* <Link href={GATSBY_URL}>Gatsby</Link>
             <span>, </span>
             <Link href={CONTENTFUL_URL}>Contentful</Link>
             <span> and </span>
             <Link href={NETLIFY_URL}>Netlify</Link>{' '}
             <span role="img" aria-label="heart">
               ❤️
-            </span>
+            </span> */}
           </TextWrapper>
         </Fade>
         <Flex>

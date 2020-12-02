@@ -55,7 +55,7 @@ exports.createPages = async ({ actions: { createPage } }) => {
       title: value.title,
       text: value.description,
       // cover: 'https://i.imgur.com/oj0468v.png', // 画像の参照先のURL必須 → ないと他のところでエラー
-      cover: value.social_image,
+      cover: 'https://thepracticaldev.s3.amazonaws.com/i/6hqmcjaxbgbon8ydw93z.png',
       url: value.url,
       date: value.readable_publish_date,
       // time: 0,

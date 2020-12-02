@@ -23,7 +23,7 @@ const LandingPage = () => {
         fontSize={[6, 7]}
         mb={[3, 4, 5]}
       >
-        {`こんにちは, I'm ${name}!`}
+        {`${name}のポートフォリオサイトです`}
       </Heading>
 
       <Heading
@@ -34,7 +34,7 @@ const LandingPage = () => {
         textAlign="center"
         style={centerHorizontally}
       >
-        <TextLoop interval={5000}>
+        {/* <TextLoop interval={5000}>
           {roles
             .sort(() => (deterministic ? 1 : Math.random() - 0.5))
             .map((text) => (
@@ -42,7 +42,7 @@ const LandingPage = () => {
                 {text}
               </Text>
             ))}
-        </TextLoop>
+        </TextLoop> */}
       </Heading>
 
       <Flex alignItems="center" justifyContent="center" flexWrap="wrap">

@@ -25,7 +25,7 @@ function IndexPage(props:Props)  {
     <Header />
     <Landing />
     <About />
-    {/* <Projects /> */}
+    <Projects />
     <Writing {...props.pageContext} />
     <Footer />
   </Layout>
