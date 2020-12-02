@@ -6,23 +6,52 @@ import { MediumAuthor, MediumPost as MediumPostType } from '../types';
 import { MEDIUM_URL } from '../utils/constants';
 import { Card } from './Card';
 import ImageLabel from './ImageLabel';
+import { createUseStyles } from 'react-jss';
+import ReactMarkdown from 'react-markdown';
+const { htmlToText } = require('html-to-text');
+
+
+
+const useStyles = createUseStyles({
+  text: {
+  },
+  container: {
+    textOverflow: 'ellipsis',
+    height: 400,
+  }
+});
 
 type PostProps = MediumPostType;
 
-export const Post = ({ title, text, cover, url, date, time }: PostProps) => (
-  <PostContainer url={url} title={title}>
-    <EllipsisHeading m={3} color="text">
-      {title}
-    </EllipsisHeading>
-    {cover && <CoverImage src={cover} height="200px" alt={title} />}
-    <Text m={3} color="text">
-      {text}
-    </Text>
-    <ImageLabel bg="primary" color="white" position="bottom-right" round>
-      {`${date} - ${Math.ceil(time)} min`}
-    </ImageLabel>
-  </PostContainer>
-);
+export const Post = ({ title, text, cover, url, date, time }: PostProps) => {
+
+  const classes = useStyles()
+  
+  return (
+    // <div className={classes.container}>
+
+    <PostContainer url={url} title={title}>
+      <EllipsisHeading m={3} color="text">
+        {title}
+      </EllipsisHeading>
+      {cover && <CoverImage src={cover} height="200px" alt={title} />}
+      <Text m={3} color="text" className={classes.text}>
+        {/* <ReactMarkdown className={classes.text}>{text}</ReactMarkdown> */}
+        {/* <div dangerouslySetInnerHTML={{ __html: text}}/> */}
+        {/* {text} */}
+        {
+          htmlToText(text, {
+            wordwrap: 130,
+          }).substr(0,100)
+        }...
+      </Text>
+      <ImageLabel bg="primary" color="white" position="bottom-right" round>
+        {`${date}`}
+        {time ? ` - ${Math.ceil(time)} min` : ''}
+      </ImageLabel>
+    </PostContainer>
+    // </div>
+  );};
 
 type MorePostsProps = {
   author: MediumAuthor;

@@ -4,17 +4,12 @@ import Header from '../components/Header';
 import Landing from '../sections/Landing';
 import About from '../sections/About';
 import Projects from '../sections/Projects';
-import Writing from '../sections/Writing';
+import Writing, { TWriting } from '../sections/Writing';
 import Footer from '../components/Footer';
 import { MediumPost } from '../types';
 
 type Props = {
-  pageContext: {
-    qiitaArticles: MediumPost[];
-    title: string
-    content: string
-  };
-
+  pageContext: TWriting
 };
 
 function IndexPage(props:Props)  {

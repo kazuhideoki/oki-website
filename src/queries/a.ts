@@ -14,9 +14,31 @@ export const a = {
     key: 'initial',
   },
   pageResources: {
-    json: { pageContext: {} },
+    json: {
+      pageContext: {
+        qiitaArticles: [
+          {
+            title:
+              '【Flutter】Firestoreからデータを読み込む。FutureBuilderとStreamBuilder',
+            text:
+              "Flutter勉強中です。Firestone からデータを取得して表示するときに躓いてしまったので備忘録。\n\n非推奨なメソッドや返り値の扱いに戸惑ってしまった。\nFutureBuilderやStreamBuilderといかに組み合わせて使うかがポイントだった。\n\n※`Firebase.initializeApp()`などの初期化は省略しています。\n\n## FutureBuilder (最初に一度だけ読み込む)\n\n\n\n```Dart\nimport 'package:flutter/material.dart';\nimport 'package:cloud_firestore/cloud_firestore.dart';\n\nclass HogeApp extends StatelessWidget {\n  \n  @override\n  Widget build(BuildContext context) {\n    // ★1 FutureBuilderを使う\n    return FutureBuilder<QuerySnapshot>(\n        // ★2 futureに`Future<QuerySnapshot>`を渡す。\n        future: FirebaseFirestore.instance.collection('posts').get(),\n        builder: (context, snapshot) {\n          if (snapshot.hasData) {\n            // ★3 `List<DocumentSnapshot>`をsnapshotから取り出す。\n            final List<DocumentSnapshot> documents = snapshot.data.docs;\n            return ListView(\n                children: documents\n                    .map((doc) => Card(\n                          child: ListTile(\n                            title: Text(doc['text']),\n                            subtitle: Text(doc['email']),\n                          ),\n                        ))\n                    .toList());\n          } else if (snapshot.hasError) {\n            return Text('エラーだよ');\n          }\n        });\n  }\n}\n\n```\n1. `FutureBuilder`を使う\n2. futureに`Future<QuerySnapshot>`を渡す。\n`FirebaseFirestore.instance.collection('posts').get()`\n古いチュートリアルなどで載っている`getDocuments()`は非推奨。`get()`を使うべし。\n\n3. `List<DocumentSnapshot>`をsnapshotから取り出す。mapとかで操作するために。ここも`documents`は非推奨。docsを使うべし。\n\n## StreamBuilder （データの更新があるたびに自動で更新）\nチャットアプリなどデータの更新が頻繁なものに有効です。\n\n```Dart\nimport 'package:flutter/material.dart';\nimport 'package:cloud_firestore/cloud_firestore.dart';\n\nclass HogeApp extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    // ★1 StreamBuilderを使う\n    return StreamBuilder<QuerySnapshot>(\n        // ★2 streamに`Stream<QuerySnapshot>`を渡す。\n        stream: FirebaseFirestore.instance.collection('posts').snapshots(),\n        builder: (context, snapshot) {\n          if (snapshot.hasData) {\n            // ★3 `List<DocumentSnapshot>`をsnapshotから取り出す。\n            final List<DocumentSnapshot> documents = snapshot.data.docs;\n            return ListView(\n                children: documents\n                    .map((doc) => Card(\n                          child: ListTile(\n                            title: Text(doc['text']),\n                            subtitle: Text(doc['email']),\n                          ),\n                        ))\n                    .toList());\n          } else if (snapshot.hasError) {\n            return Text('エラーだよ');\n          }\n        });\n  }\n}\n\n```\n\n1. `StreamBuilder`を使う\n2. streamに`Stream<QuerySnapshot>`を渡す。\n`FirebaseFirestore.instance.collection('posts'). snapshot()`\n\n3. `List<DocumentSnapshot>`をsnapshotから取り出す。ここは同じ。\n\n## まとめ\n\n- FutureやStreamを渡して、builderで返り値のsnapshotを処理する\n- 躓いたら公式ドキュメントやクラスの定義などを調べよう。\n\n間違いがあれば指摘していただけるとありがたいです。\n\n\n## 参考になったサイト\n[Cloud Firestore | FlutterFire](https://firebase.flutter.dev/docs/firestore/usage/)\n\n[Firebaseを使ったアプリ | Flutterで始めるアプリ開発](https://www.flutter-study.dev/firebase-app/firestore)\n",
+            cover: 'https://i.imgur.com/oj0468v.png',
+            url: 'https://qiita.com/kazuhideoki/items/ffe1b92aa17565ef8e4c',
+            date: '2020-11-27T19:22:18+09:00',
+          },
+          {
+            title: 'Reactでcssをオブジェクトとして読み込む',
+            text:
+              '<h1>cssファイルを読み込んだのに{styles.〇〇}で使えない</h1>\nimport React from "react";\nimport styles from "./styles.css";\nこのように読み込んだ。\n\nclassName={styles.〇〇}で設定してもスタイルが適応されない！！\nconsole.logで確認したらundifined。\n\n\nハマってしまったので備忘録\n\n<a src="https://kapu-kapu.hatenablog.com/entry/2018/11/19/132655">create-react-appで簡単にcss moduleが使えるようになってた。</a>\n\n↑ここが参考になった。\n\n<h2>cssファイルを〇〇.css→〇〇.module.cssにする</h2>\nimport React from "react";\nimport styles from "./styles.<b>module</b>.css";\nそしてこのように読み込んだ。\n\nこれだけで解決。\nちゃんとオブジェクトとして取り出せるようになった。\n',
+            cover: 'https://i.imgur.com/oj0468v.png',
+            url: 'https://qiita.com/kazuhideoki/items/55957031494fb81ebed9',
+            date: '2019-12-29T17:38:47+09:00',
+          },
+        ],
+      },
+    },
     page: {
-      componentChunkName: 'component---src-pages-index-tsx',
+      componentChunkName: 'component---src-templates-index-tsx',
       path: '/',
       webpackCompilationHash: '1564841ce2d4961e0f46',
       staticQueryHashes: [
@@ -222,7 +244,138 @@ export const a = {
     },
   },
   uri: '/',
-  pageContext: {},
+  pageContext: {
+    qiitaArticles: [
+      {
+        title:
+          '【Flutter】Firestoreからデータを読み込む。FutureBuilderとStreamBuilder',
+        text:
+          "Flutter勉強中です。Firestone からデータを取得して表示するときに躓いてしまったので備忘録。\n\n非推奨なメソッドや返り値の扱いに戸惑ってしまった。\nFutureBuilderやStreamBuilderといかに組み合わせて使うかがポイントだった。\n\n※`Firebase.initializeApp()`などの初期化は省略しています。\n\n## FutureBuilder (最初に一度だけ読み込む)\n\n\n\n```Dart\nimport 'package:flutter/material.dart';\nimport 'package:cloud_firestore/cloud_firestore.dart';\n\nclass HogeApp extends StatelessWidget {\n  \n  @override\n  Widget build(BuildContext context) {\n    // ★1 FutureBuilderを使う\n    return FutureBuilder<QuerySnapshot>(\n        // ★2 futureに`Future<QuerySnapshot>`を渡す。\n        future: FirebaseFirestore.instance.collection('posts').get(),\n        builder: (context, snapshot) {\n          if (snapshot.hasData) {\n            // ★3 `List<DocumentSnapshot>`をsnapshotから取り出す。\n            final List<DocumentSnapshot> documents = snapshot.data.docs;\n            return ListView(\n                children: documents\n                    .map((doc) => Card(\n                          child: ListTile(\n                            title: Text(doc['text']),\n                            subtitle: Text(doc['email']),\n                          ),\n                        ))\n                    .toList());\n          } else if (snapshot.hasError) {\n            return Text('エラーだよ');\n          }\n        });\n  }\n}\n\n```\n1. `FutureBuilder`を使う\n2. futureに`Future<QuerySnapshot>`を渡す。\n`FirebaseFirestore.instance.collection('posts').get()`\n古いチュートリアルなどで載っている`getDocuments()`は非推奨。`get()`を使うべし。\n\n3. `List<DocumentSnapshot>`をsnapshotから取り出す。mapとかで操作するために。ここも`documents`は非推奨。docsを使うべし。\n\n## StreamBuilder （データの更新があるたびに自動で更新）\nチャットアプリなどデータの更新が頻繁なものに有効です。\n\n```Dart\nimport 'package:flutter/material.dart';\nimport 'package:cloud_firestore/cloud_firestore.dart';\n\nclass HogeApp extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    // ★1 StreamBuilderを使う\n    return StreamBuilder<QuerySnapshot>(\n        // ★2 streamに`Stream<QuerySnapshot>`を渡す。\n        stream: FirebaseFirestore.instance.collection('posts').snapshots(),\n        builder: (context, snapshot) {\n          if (snapshot.hasData) {\n            // ★3 `List<DocumentSnapshot>`をsnapshotから取り出す。\n            final List<DocumentSnapshot> documents = snapshot.data.docs;\n            return ListView(\n                children: documents\n                    .map((doc) => Card(\n                          child: ListTile(\n                            title: Text(doc['text']),\n                            subtitle: Text(doc['email']),\n                          ),\n                        ))\n                    .toList());\n          } else if (snapshot.hasError) {\n            return Text('エラーだよ');\n          }\n        });\n  }\n}\n\n```\n\n1. `StreamBuilder`を使う\n2. streamに`Stream<QuerySnapshot>`を渡す。\n`FirebaseFirestore.instance.collection('posts'). snapshot()`\n\n3. `List<DocumentSnapshot>`をsnapshotから取り出す。ここは同じ。\n\n## まとめ\n\n- FutureやStreamを渡して、builderで返り値のsnapshotを処理する\n- 躓いたら公式ドキュメントやクラスの定義などを調べよう。\n\n間違いがあれば指摘していただけるとありがたいです。\n\n\n## 参考になったサイト\n[Cloud Firestore | FlutterFire](https://firebase.flutter.dev/docs/firestore/usage/)\n\n[Firebaseを使ったアプリ | Flutterで始めるアプリ開発](https://www.flutter-study.dev/firebase-app/firestore)\n",
+        cover: 'https://i.imgur.com/oj0468v.png',
+        url: 'https://qiita.com/kazuhideoki/items/ffe1b92aa17565ef8e4c',
+        date: '2020-11-27T19:22:18+09:00',
+      },
+      {
+        title: 'Reactでcssをオブジェクトとして読み込む',
+        text:
+          '<h1>cssファイルを読み込んだのに{styles.〇〇}で使えない</h1>\nimport React from "react";\nimport styles from "./styles.css";\nこのように読み込んだ。\n\nclassName={styles.〇〇}で設定してもスタイルが適応されない！！\nconsole.logで確認したらundifined。\n\n\nハマってしまったので備忘録\n\n<a src="https://kapu-kapu.hatenablog.com/entry/2018/11/19/132655">create-react-appで簡単にcss moduleが使えるようになってた。</a>\n\n↑ここが参考になった。\n\n<h2>cssファイルを〇〇.css→〇〇.module.cssにする</h2>\nimport React from "react";\nimport styles from "./styles.<b>module</b>.css";\nそしてこのように読み込んだ。\n\nこれだけで解決。\nちゃんとオブジェクトとして取り出せるようになった。\n',
+        cover: 'https://i.imgur.com/oj0468v.png',
+        url: 'https://qiita.com/kazuhideoki/items/55957031494fb81ebed9',
+        date: '2019-12-29T17:38:47+09:00',
+      },
+    ],
+  },
   params: {},
-  pathContext: {},
+  pathContext: {
+    qiitaArticles: [
+      {
+        title:
+          '【Flutter】Firestoreからデータを読み込む。FutureBuilderとStreamBuilder',
+        text:
+          "Flutter勉強中です。Firestone からデータを取得して表示するときに躓いてしまったので備忘録。\n\n非推奨なメソッドや返り値の扱いに戸惑ってしまった。\nFutureBuilderやStreamBuilderといかに組み合わせて使うかがポイントだった。\n\n※`Firebase.initializeApp()`などの初期化は省略しています。\n\n## FutureBuilder (最初に一度だけ読み込む)\n\n\n\n```Dart\nimport 'package:flutter/material.dart';\nimport 'package:cloud_firestore/cloud_firestore.dart';\n\nclass HogeApp extends StatelessWidget {\n  \n  @override\n  Widget build(BuildContext context) {\n    // ★1 FutureBuilderを使う\n    return FutureBuilder<QuerySnapshot>(\n        // ★2 futureに`Future<QuerySnapshot>`を渡す。\n        future: FirebaseFirestore.instance.collection('posts').get(),\n        builder: (context, snapshot) {\n          if (snapshot.hasData) {\n            // ★3 `List<DocumentSnapshot>`をsnapshotから取り出す。\n            final List<DocumentSnapshot> documents = snapshot.data.docs;\n            return ListView(\n                children: documents\n                    .map((doc) => Card(\n                          child: ListTile(\n                            title: Text(doc['text']),\n                            subtitle: Text(doc['email']),\n                          ),\n                        ))\n                    .toList());\n          } else if (snapshot.hasError) {\n            return Text('エラーだよ');\n          }\n        });\n  }\n}\n\n```\n1. `FutureBuilder`を使う\n2. futureに`Future<QuerySnapshot>`を渡す。\n`FirebaseFirestore.instance.collection('posts').get()`\n古いチュートリアルなどで載っている`getDocuments()`は非推奨。`get()`を使うべし。\n\n3. `List<DocumentSnapshot>`をsnapshotから取り出す。mapとかで操作するために。ここも`documents`は非推奨。docsを使うべし。\n\n## StreamBuilder （データの更新があるたびに自動で更新）\nチャットアプリなどデータの更新が頻繁なものに有効です。\n\n```Dart\nimport 'package:flutter/material.dart';\nimport 'package:cloud_firestore/cloud_firestore.dart';\n\nclass HogeApp extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    // ★1 StreamBuilderを使う\n    return StreamBuilder<QuerySnapshot>(\n        // ★2 streamに`Stream<QuerySnapshot>`を渡す。\n        stream: FirebaseFirestore.instance.collection('posts').snapshots(),\n        builder: (context, snapshot) {\n          if (snapshot.hasData) {\n            // ★3 `List<DocumentSnapshot>`をsnapshotから取り出す。\n            final List<DocumentSnapshot> documents = snapshot.data.docs;\n            return ListView(\n                children: documents\n                    .map((doc) => Card(\n                          child: ListTile(\n                            title: Text(doc['text']),\n                            subtitle: Text(doc['email']),\n                          ),\n                        ))\n                    .toList());\n          } else if (snapshot.hasError) {\n            return Text('エラーだよ');\n          }\n        });\n  }\n}\n\n```\n\n1. `StreamBuilder`を使う\n2. streamに`Stream<QuerySnapshot>`を渡す。\n`FirebaseFirestore.instance.collection('posts'). snapshot()`\n\n3. `List<DocumentSnapshot>`をsnapshotから取り出す。ここは同じ。\n\n## まとめ\n\n- FutureやStreamを渡して、builderで返り値のsnapshotを処理する\n- 躓いたら公式ドキュメントやクラスの定義などを調べよう。\n\n間違いがあれば指摘していただけるとありがたいです。\n\n\n## 参考になったサイト\n[Cloud Firestore | FlutterFire](https://firebase.flutter.dev/docs/firestore/usage/)\n\n[Firebaseを使ったアプリ | Flutterで始めるアプリ開発](https://www.flutter-study.dev/firebase-app/firestore)\n",
+        cover: 'https://i.imgur.com/oj0468v.png',
+        url: 'https://qiita.com/kazuhideoki/items/ffe1b92aa17565ef8e4c',
+        date: '2020-11-27T19:22:18+09:00',
+      },
+      {
+        title: 'Reactでcssをオブジェクトとして読み込む',
+        text:
+          '<h1>cssファイルを読み込んだのに{styles.〇〇}で使えない</h1>\nimport React from "react";\nimport styles from "./styles.css";\nこのように読み込んだ。\n\nclassName={styles.〇〇}で設定してもスタイルが適応されない！！\nconsole.logで確認したらundifined。\n\n\nハマってしまったので備忘録\n\n<a src="https://kapu-kapu.hatenablog.com/entry/2018/11/19/132655">create-react-appで簡単にcss moduleが使えるようになってた。</a>\n\n↑ここが参考になった。\n\n<h2>cssファイルを〇〇.css→〇〇.module.cssにする</h2>\nimport React from "react";\nimport styles from "./styles.<b>module</b>.css";\nそしてこのように読み込んだ。\n\nこれだけで解決。\nちゃんとオブジェクトとして取り出せるようになった。\n',
+        cover: 'https://i.imgur.com/oj0468v.png',
+        url: 'https://qiita.com/kazuhideoki/items/55957031494fb81ebed9',
+        date: '2019-12-29T17:38:47+09:00',
+      },
+    ],
+  },
 };
+
+const b = {
+  rendered_body:
+    '<p>Flutter勉強中です。Firestone からデータを取得して表示するときに躓いてしまったので備忘録。</p>\n\n<p>非推奨なメソッドや返り値の扱いに戸惑ってしまった。pener" target="_blank">Cloud Firestore | FlutterFire</a></p>\n\n<p><a href="https://www.flutter-study.dev/firebase-app/firestore" rel="nofollow noopener" target="_blank">Firebaseを使ったアプリ | Flutterで始めるアプリ開発</a></p>\n',
+  body:
+    "Flutter勉強中です。Firestone からデータを取得して表示するときに躓いてしまったので備忘録。\n\n非推奨なメソッドや返り値の扱いに戸惑ってしまった。\nFutureBuilderやStreamBuilderといかに組み合わせて使うかがポイントだった。\n\n※`Firebase.initializeApp()`などの初期化は省略しています。\n\n## FutureBuilder (最初に一度だけ読みirebase-app/firestore)\n",
+  coediting: false,
+  comments_count: 0,
+  created_at: '2020-11-27T19:22:18+09:00',
+  group: null,
+  id: 'ffe1b92aa17565ef8e4c',
+  likes_count: 0,
+  private: false,
+  reactions_count: 0,
+  tags: [
+    { name: 'Dart', versions: [] },
+    { name: 'Firebase', versions: [] },
+    { name: 'Flutter', versions: [] },
+    { name: 'Firestore', versions: [] },
+  ],
+  title:
+    '【Flutter】Firestoreからデータを読み込む。FutureBuilderとStreamBuilder',
+  updated_at: '2020-11-27T19:48:28+09:00',
+  url: 'https://qiita.com/kazuhideoki/items/ffe1b92aa17565ef8e4c',
+  user: {
+    description:
+      '本職はシンガポールで美容師やっている人。\r\n職場で使っているタブレット用ウェブアプリを自分で開発、運用している。\r\n仕事でもプライベートでもプログラミングしてる。',
+    facebook_id: 'kazuhide.oki',
+    followees_count: 0,
+    followers_count: 0,
+    github_login_name: null,
+    id: 'kazuhideoki',
+    items_count: 2,
+    linkedin_id: '',
+    location: '',
+    name: 'Kazuhide Oki',
+    organization: '',
+    permanent_id: 558894,
+    profile_image_url:
+      'https://s3-ap-northeast-1.amazonaws.com/qiita-image-store/0/558894/e016a123ec4acabc460b20705361a04b8a039fac/large.png?1606539037',
+    team_only: false,
+    twitter_screen_name: null,
+    website_url: '',
+  },
+  page_views_count: null,
+};
+
+const dev = [
+  {
+    type_of: 'article',
+    id: 528324,
+    title:
+      'How to get data from Firestore and show it on `FlutterBuilder` or `StreamBuilder`',
+    description:
+      "I'm learning Flutter. I was stacked when I got data from Firestore. So this is a solution to that....",
+    readable_publish_date: 'Nov 30',
+    slug:
+      'how-to-get-data-from-firestore-and-show-it-on-flutterbuilder-or-streambuilder-e05',
+    path:
+      '/kazuhideoki/how-to-get-data-from-firestore-and-show-it-on-flutterbuilder-or-streambuilder-e05',
+    url:
+      'https://dev.to/kazuhideoki/how-to-get-data-from-firestore-and-show-it-on-flutterbuilder-or-streambuilder-e05',
+    comments_count: 0,
+    public_reactions_count: 1,
+    collection_id: null,
+    published_timestamp: '2020-11-30T00:46:13Z',
+    positive_reactions_count: 1,
+    cover_image: null,
+    social_image: 'https://dev.to/social_previews/article/528324.png',
+    canonical_url:
+      'https://dev.to/kazuhideoki/how-to-get-data-from-firestore-and-show-it-on-flutterbuilder-or-streambuilder-e05',
+    created_at: '2020-11-29T23:15:31Z',
+    edited_at: '2020-11-30T22:52:50Z',
+    crossposted_at: null,
+    published_at: '2020-11-30T00:46:13Z',
+    last_comment_at: '2020-11-30T00:46:13Z',
+    tag_list: ['flutter', 'dart', 'firebase', 'firestore'],
+    tags: 'flutter, dart, firebase, firestore',
+    user: {
+      name: 'Kazuhide Oki',
+      username: 'kazuhideoki',
+      twitter_username: 'kazuhideoki1',
+      github_username: 'kazuhideoki',
+      website_url: null,
+      profile_image:
+        'https://res.cloudinary.com/practicaldev/image/fetch/s--T_WQDQ_b--/c_fill,f_auto,fl_progressive,h_640,q_auto,w_640/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/517236/9cbad723-8b30-4ee2-8f96-29d4eaa1ff26.jpg',
+      profile_image_90:
+        'https://res.cloudinary.com/practicaldev/image/fetch/s--tViQ-JzU--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/517236/9cbad723-8b30-4ee2-8f96-29d4eaa1ff26.jpg',
+    },
+  },
+];

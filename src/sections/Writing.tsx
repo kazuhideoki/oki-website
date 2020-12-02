@@ -8,19 +8,18 @@ import { useGetQiitaArticles } from '../queries/qiita/useGetQiitaArticles';
 import { Post } from '../components/Post';
 import { MediumPost } from '../types';
 
-type Props = { qiitaArticles?: MediumPost[], 
-  title: string
-  content: string
+export type TWriting = {
+  qiitaArticles: MediumPost[];
+  devArticles: MediumPost[];
 };
 
-export default function Writing(props: Props) {
+export default function Writing(props: TWriting) {
   console.log('Writingのpropsは ' + JSON.stringify(props));
-  
+
   const { qiitaArticles } = props;
   // console.log('WritingのageContextは ' + pageContext);
   // const {qiitaArticles} = pageContext
   console.log('WritingのqiitaArticlesは ' + qiitaArticles);
-  
 
   const { posts } = useMediumQuery();
   // const qiitaPosts = await useGetQiitaArticles()
@@ -37,17 +36,30 @@ export default function Writing(props: Props) {
           </Fade>
         </CardContainer>
       </Section.Container>
-      {props.qiitaArticles ? props.qiitaArticles[0].title : ''}
-      {/* <Section.Container id="qiita" Background={Background}>
-        <Section.Header name="qiita" icon="✍️" label="qiita" />
-        <CardContainer minWidth="300px">
-          <Fade direction="down" triggerOnce cascade damping={0.5}>
-            {qiitaArticles.map((p) => (
-              <Post {...p} key={p.url} />
-            ))}
-          </Fade>
-        </CardContainer>
-      </Section.Container> */}
+      {props.qiitaArticles.length ? (
+        <Section.Container id="qiita" Background={Background}>
+          <Section.Header name="Qiita" icon="✍️" label="qiita" />
+          <CardContainer minWidth="300px">
+            <Fade direction="down" triggerOnce cascade damping={0.5}>
+              {props.qiitaArticles.map((p) => (
+                <Post {...p} key={p.url} />
+              ))}
+            </Fade>
+          </CardContainer>
+        </Section.Container>
+      ) : null}
+      {props.devArticles.length ? (
+        <Section.Container id="dev" Background={Background}>
+          <Section.Header name="Dev" icon="✍️" label="dev" />
+          <CardContainer minWidth="300px">
+            <Fade direction="down" triggerOnce cascade damping={0.5}>
+              {props.devArticles.map((p) => (
+                <Post {...p} key={p.url} />
+              ))}
+            </Fade>
+          </CardContainer>
+        </Section.Container>
+      ) : null}
     </>
   );
 };
