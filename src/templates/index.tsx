@@ -13,21 +13,20 @@ type Props = {
 };
 
 function IndexPage(props:Props)  {
-  console.log(
-    'indexのpropsは ' + JSON.stringify(props),
-  );
-  console.log(
-    'indexのprops.pageContextは ' + JSON.stringify(props.pageContext),
-  );
+  // console.log(
+  //   'indexのpropsは ' + JSON.stringify(props),
+  // );
+  // console.log(
+  //   'indexのprops.pageContextは ' + JSON.stringify(props.pageContext),
+  // );
   
   return(
   <Layout>
     <Header />
     <Landing />
     <About />
-    <Projects />
-      {/* <Writing qiitaArticles={props.pageContext.qiitaArticles} {...props.pageContext} /> */}
-      <Writing {...props.pageContext} />
+    {/* <Projects /> */}
+    <Writing {...props.pageContext} />
     <Footer />
   </Layout>
 );

@@ -14,28 +14,25 @@ export type TWriting = {
 };
 
 export default function Writing(props: TWriting) {
-  console.log('Writingのpropsは ' + JSON.stringify(props));
+  // console.log('Writingのpropsは ' + JSON.stringify(props));
 
-  const { qiitaArticles } = props;
-  // console.log('WritingのageContextは ' + pageContext);
-  // const {qiitaArticles} = pageContext
-  console.log('WritingのqiitaArticlesは ' + qiitaArticles);
-
+  // contentfulからの読み込みを個々にするか？
   const { posts } = useMediumQuery();
-  // const qiitaPosts = await useGetQiitaArticles()
 
   return (
     <>
-      <Section.Container id="writing" Background={Background}>
-        <Section.Header name="Writing" icon="✍️" label="writing" />
-        <CardContainer minWidth="300px">
-          <Fade direction="down" triggerOnce cascade damping={0.5}>
-            {posts.map((p) => (
-              <Post {...p} key={p.url} />
-            ))}
-          </Fade>
-        </CardContainer>
-      </Section.Container>
+      {/* {posts.length ? 
+        <Section.Container id="writing" Background={Background}>
+          <Section.Header name="Writing" icon="✍️" label="writing" />
+          <CardContainer minWidth="300px">
+            <Fade direction="down" triggerOnce cascade damping={0.5}>
+              {posts.map((p) => (
+                <Post {...p} key={p.url} />
+              ))}
+            </Fade>
+          </CardContainer>
+        </Section.Container>
+      : null} */}
       {props.qiitaArticles.length ? (
         <Section.Container id="qiita" Background={Background}>
           <Section.Header name="Qiita" icon="✍️" label="qiita" />

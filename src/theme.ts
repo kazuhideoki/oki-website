@@ -10,15 +10,25 @@ const BASE_THEME = preset as Theme;
 
 const theme: Theme = {
   ...BASE_THEME,
+  // colors: {
+  //   background: '#FFFFFF',
+  //   muted: '#f0e6f6',
+  //   gray: '#ddd',
+  //   text: '#333333',
+
+  //   primary: '#7c37ad',
+  //   secondary: '#ff4081',
+  //   highlight: '#ff79b0',
+  // },
   colors: {
-    background: '#FFFFFF',
+    background: '#f9f7f7',
     muted: '#f0e6f6',
     gray: '#ddd',
     text: '#333333',
 
-    primary: '#7c37ad',
-    secondary: '#ff4081',
-    highlight: '#ff79b0',
+    primary: '#112d4e',
+    secondary: '#3f72af',
+    highlight: '#dbe2ef',
   },
   queries: {
     xs: '@media screen and (max-width: 40em)',
