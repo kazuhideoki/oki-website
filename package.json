@@ -66,6 +66,7 @@
     "react-helmet": "^6.1.0",
     "react-jss": "^10.5.0",
     "react-markdown": "^4.3.1",
+    "react-responsive": "^8.2.0",
     "react-scroll-section": "^3.0.2",
     "react-text-loop": "^2.0.1",
     "rebass": "^4.0.7",

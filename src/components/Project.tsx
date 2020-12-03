@@ -17,12 +17,16 @@ const Project = ({
   type,
   publishedDate,
   logo,
-}: Props) => (
+}: Props) => {
+  //  const isSmallScreen = useMediaQuery({
+  //    query: '(max-device-width: 600px)',
+  //  });  
+  return (
   <Card p={0}>
     <Flex style={{ height: CARD_HEIGHT }}>
       <TextContainer>
         <span>
-          <Title my={2} pb={1} color="text">
+          <Title my={2} pb={1} color="text" >
             {name}
           </Title>
         </span>
@@ -50,14 +54,14 @@ const Project = ({
           <ImageLabel bg="primary" color="white" position="bottom-right" round>
             {type}
           </ImageLabel>
-          <Hide query="md">
+          <Hide query="xs">
             <ImageLabel bg="muted">{publishedDate}</ImageLabel>
           </Hide>
         </ProjectTag>
       </ImageContainer>
     </Flex>
   </Card>
-);
+)}
 
 const CARD_HEIGHT = '200px';
 

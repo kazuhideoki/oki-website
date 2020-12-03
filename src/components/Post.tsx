@@ -13,12 +13,13 @@ const { htmlToText } = require('html-to-text');
 
 
 const useStyles = createUseStyles({
-  text: {
+  title: {
+    display: 'inline-flex',
   },
   container: {
     textOverflow: 'ellipsis',
     height: 400,
-  }
+  },
 });
 
 type PostProps = MediumPostType;
@@ -31,11 +32,11 @@ export const Post = ({ title, text, cover, url, date, time }: PostProps) => {
     // <div className={classes.container}>
 
     <PostContainer url={url} title={title}>
-      <EllipsisHeading m={3} color="text">
+      <EllipsisHeading m={3} color="text" className={classes.title}>
         {title}
       </EllipsisHeading>
       {cover && <CoverImage src={cover} height="200px" alt={title} />}
-      <Text m={3} color="text" className={classes.text}>
+      <Text m={3} color="text" className={classes.title}>
         {/* <ReactMarkdown className={classes.text}>{text}</ReactMarkdown> */}
         {/* <div dangerouslySetInnerHTML={{ __html: text}}/> */}
         {/* {text} */}
