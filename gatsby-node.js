@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-const path = require('path');
 
 exports.createPages = async ({ actions: { createPage } }) => {
   const header = {
@@ -25,7 +24,6 @@ exports.createPages = async ({ actions: { createPage } }) => {
     return {
       title: value.title,
       text: value.rendered_body,
-      // cover: 'https://i.imgur.com/oj0468v.png', // 画像の参照先のURL必須 → ないと他のところでエラー
       cover:
         'https://cdn.qiita.com/assets/qiita-fb-fe28c64039d925349e620ba55091e078.png', // 画像の参照先のURL必須 → ないと他のところでエラー
       url: value.url,

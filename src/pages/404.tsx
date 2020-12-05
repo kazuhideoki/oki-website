@@ -6,7 +6,7 @@ import Triangle from '../components/Triangle';
 
 const NotFoundPage = () => (
   <Layout>
-    <Section.Container id="404" Background={Background}>
+    <Section.Container id="404" Background={Background404}>
       <Box width={[320, 400, 600]} m="auto">
         <Heading color="text" fontSize={['8rem', '12rem', '14rem']} as="h1">
           404
@@ -19,7 +19,7 @@ const NotFoundPage = () => (
   </Layout>
 );
 
-const Background = () => (
+export const Background404 = () => (
   <>
     <Triangle
       color="muted"
