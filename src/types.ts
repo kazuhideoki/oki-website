@@ -21,6 +21,7 @@ export type Project = {
 
 export type AboutMe = {
   markdown: string;
+  markdownMain: string;
   profile: Image;
 };
 

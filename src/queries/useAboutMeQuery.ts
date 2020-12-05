@@ -8,6 +8,11 @@ export type QueryResponse = {
         rawMarkdownBody: string;
       };
     };
+    aboutMeMain: {
+      childMarkdownRemark: {
+        rawMarkdownBody: string;
+      };
+    };
     profile: {
       title: string;
       image: {
@@ -19,7 +24,7 @@ export type QueryResponse = {
 
 export const useAboutMeQuery = (): AboutMe => {
   const {
-    contentfulAbout: { aboutMe, profile },
+    contentfulAbout: { aboutMe, aboutMeMain, profile },
   } = useStaticQuery<QueryResponse>(graphql`
     query AboutMeQuery {
       contentfulAbout {
@@ -33,12 +38,18 @@ export const useAboutMeQuery = (): AboutMe => {
             src
           }
         }
+        aboutMeMain {
+          childMarkdownRemark {
+            rawMarkdownBody
+          }
+        }
       }
     }
   `);
 
   return {
     markdown: aboutMe.childMarkdownRemark.rawMarkdownBody,
+    markdownMain: aboutMeMain.childMarkdownRemark.rawMarkdownBody,
     profile: {
       // alt: profile.title,
       src: profile.image.src,
