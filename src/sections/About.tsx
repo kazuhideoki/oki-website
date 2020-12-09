@@ -22,6 +22,7 @@ const About = () => {
           <Fade direction="down" triggerOnce>
             <ReactMarkdown source={markdown} renderers={markdownRenderer} />
           </Fade>
+          <Link href='/about'>詳しいプロフィールを見る</Link>
         </Box>
 
         <Box

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Image, Flex } from 'rebass/styled-components';
+import { Box, Image, Flex, Link } from 'rebass/styled-components';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import { Fade } from 'react-awesome-reveal';
@@ -27,6 +27,9 @@ const AboutMain = () => {
                 renderers={markdownRenderer}
               />
             </Fade>
+            <Link href='/'>
+              トップページへ戻る
+            </Link>
           </Box>
         </Flex>
       </Section.Container>
