@@ -28,7 +28,7 @@ const AboutMain = () => {
               />
             </Fade>
             <Link href='/'>
-              トップページへ戻る
+              トップページへ戻る👉
             </Link>
           </Box>
         </Flex>
