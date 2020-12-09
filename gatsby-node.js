@@ -7,7 +7,7 @@ exports.createPages = async ({ actions: { createPage } }) => {
     },
   };
   const res = await fetch(
-    'https://qiita.com/api/v2/authenticated_user/items',
+    'https://qiita.com/api/v2/authenticated_user/items?page=1&per_page=3',
     header,
   );
   console.log('resは ' + res);
@@ -16,30 +16,29 @@ exports.createPages = async ({ actions: { createPage } }) => {
 
   // console.log('jsonは ' + JSON.stringify(json[0]));
 
-  const qiitaArticles = json.map((value) => {
+  const qiitaCover = 'https://cdn.qiita.com/assets/qiita-fb-fe28c64039d925349e620ba55091e078.png' // 画像の参照先のURL必須 → ないと他のところでエラー
+  let qiitaArticles = json.map((value) => {
 
     const date = new Date(value.created_at)
-    dateJapanese = `${date.getMonth() + 1}月${date.getDate()}日`
+    const dateJapanese = `${date.getMonth() + 1}月${date.getDate()}日`
     
     return {
       title: value.title,
       text: value.rendered_body,
-      cover:
-        'https://cdn.qiita.com/assets/qiita-fb-fe28c64039d925349e620ba55091e078.png', // 画像の参照先のURL必須 → ないと他のところでエラー
+      cover: qiitaCover,        
       url: value.url,
       date: dateJapanese,
-      // time: 0,
     };});
   console.log('gatsby-nodeのqiitaArticlesは ' + qiitaArticles);
 
-  // const header = {
-  //   headers: {
-  //     Authorization: `Bearer ${process.env.DEV_TOKEN}`,
-  //   },
-  // };
+  const header2 = {
+    headers: {
+      Authorization: `Bearer ${process.env.DEV_TOKEN}`,
+    },
+  };
   const res2 = await fetch(
-    'https://dev.to/api/articles?username=kazuhideoki',
-    // header,
+    'https://dev.to/api/articles?username=kazuhideoki&page=1&per_page=20',
+    header2,
   );
   console.log('resは ' + res);
 
@@ -47,13 +46,14 @@ exports.createPages = async ({ actions: { createPage } }) => {
 
   console.log('json2は ' + JSON.stringify(json2[0]));
 
-  const devArticles = json2.map((value) => {
+  const devCover = 'https://thepracticaldev.s3.amazonaws.com/i/6hqmcjaxbgbon8ydw93z.png'
+  let devArticles = json2.map((value) => {
   
     return {
       title: value.title,
-      text: value.description,
+      text: 'Read other articles',
       // cover: 'https://i.imgur.com/oj0468v.png', // 画像の参照先のURL必須 → ないと他のところでエラー
-      cover: 'https://thepracticaldev.s3.amazonaws.com/i/6hqmcjaxbgbon8ydw93z.png',
+      cover: devCover,
       url: value.url,
       date: value.readable_publish_date,
       // time: 0,

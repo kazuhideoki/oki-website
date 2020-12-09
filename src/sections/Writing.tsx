@@ -7,6 +7,7 @@ import { useMediumQuery } from '../queries/useMediumQuery';
 import { useGetQiitaArticles } from '../queries/qiita/useGetQiitaArticles';
 import { Post } from '../components/Post';
 import { MediumPost } from '../types';
+import { Link } from 'rebass';
 
 export type TWriting = {
   qiitaArticles: MediumPost[];
@@ -35,7 +36,9 @@ export default function Writing(props: TWriting) {
       : null} */}
       {props.qiitaArticles.length ? (
         <Section.Container id="qiita" Background={Background}>
-          <Section.Header name="Qiita" icon="✍️" label="qiita" />
+          <Link href="https://qiita.com/kazuhideoki">
+            <Section.Header name="Qiita" icon="✍️" label="qiita" />
+          </Link>
           <CardContainer minWidth="300px">
             <Fade direction="down" triggerOnce cascade damping={0.5}>
               {props.qiitaArticles.map((p) => (
@@ -47,7 +50,9 @@ export default function Writing(props: TWriting) {
       ) : null}
       {props.devArticles.length ? (
         <Section.Container id="dev" Background={Background}>
-          <Section.Header name="Dev" icon="✍️" label="dev" />
+          <Link href="https://dev.to/kazuhideoki">
+            <Section.Header name="Dev" icon="✍️" label="dev" />
+          </Link>
           <CardContainer minWidth="300px">
             <Fade direction="down" triggerOnce cascade damping={0.5}>
               {props.devArticles.map((p) => (
