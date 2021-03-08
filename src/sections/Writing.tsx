@@ -36,9 +36,7 @@ export default function Writing(props: TWriting) {
       : null} */}
       {props.qiitaArticles.length ? (
         <Section.Container id="qiita" Background={Background}>
-          <a href="https://qiita.com/kazuhideoki">
-            <Section.Header name="Qiita" icon="✍️" label="qiita" />
-          </a>
+          <Section.Header name="Qiita" icon="✍️" label="qiita" />
           <CardContainer minWidth="300px">
             <Fade direction="down" triggerOnce cascade damping={0.5}>
               {props.qiitaArticles.map((p) => (
@@ -50,9 +48,7 @@ export default function Writing(props: TWriting) {
       ) : null}
       {props.devArticles.length ? (
         <Section.Container id="dev" Background={Background}>
-          <a href="https://dev.to/kazuhideoki">
-            <Section.Header name="Dev" icon="✍️" label="dev" />
-          </a>
+          <Section.Header name="Dev" icon="✍️" label="dev" />
           <CardContainer minWidth="300px">
             <Fade direction="down" triggerOnce cascade damping={0.5}>
               {props.devArticles.map((p) => (
