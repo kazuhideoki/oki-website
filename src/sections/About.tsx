@@ -14,9 +14,9 @@ const About = () => {
 
   return (
     <Section.Container id="about" Background={Background}>
-      {/* <Link href='/about'> */}
-      <Section.Header name="About me" icon="🙋‍♂️" label="person" />
-      {/* </Link> */}
+      <a href="/about">
+        <Section.Header name="About me" icon="🙋‍♂️" label="person" />
+      </a>
       <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
         <Box width={[1, 1, 4 / 6]} px={[1, 2, 4]} mt={2}>
           <Fade direction="down" triggerOnce>
