@@ -9,27 +9,20 @@ import Footer from '../components/Footer';
 import { MediumPost } from '../types';
 
 type Props = {
-  pageContext: TWriting
+  pageContext: TWriting;
 };
 
-function IndexPage(props:Props)  {
-  // console.log(
-  //   'indexのpropsは ' + JSON.stringify(props),
-  // );
-  // console.log(
-  //   'indexのprops.pageContextは ' + JSON.stringify(props.pageContext),
-  // );
-  
-  return(
-  <Layout>
-    <Header />
-    <Landing />
-    <About />
-    <Projects />
-    <Writing {...props.pageContext} />
-    <Footer />
-  </Layout>
-);
+function IndexPage(props: Props) {
+  return (
+    <Layout>
+      <Header />
+      <Landing />
+      <About />
+      <Projects />
+      <Writing {...props.pageContext} />
+      <Footer />
+    </Layout>
+  );
 }
 
 export default IndexPage;

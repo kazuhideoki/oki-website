@@ -16,8 +16,6 @@ exports.createPages = async ({ actions: { createPage } }) => {
     return index < 3;
   });
 
-  console.log('jsonは ' + JSON.stringify(json));
-
   const qiitaCover =
     'https://cdn.qiita.com/assets/qiita-fb-fe28c64039d925349e620ba55091e078.png'; // 画像の参照先のURL必須 → ないと他のところでエラー
   let qiitaArticles = json.map((value) => {
@@ -32,7 +30,6 @@ exports.createPages = async ({ actions: { createPage } }) => {
       date: dateJapanese,
     };
   });
-  console.log('gatsby-nodeのqiitaArticlesは ' + qiitaArticles);
 
   const header2 = {
     headers: {
@@ -50,8 +47,6 @@ exports.createPages = async ({ actions: { createPage } }) => {
     return index < 3;
   });
 
-  console.log('json2は ' + JSON.stringify(json2));
-
   const devCover =
     'https://thepracticaldev.s3.amazonaws.com/i/6hqmcjaxbgbon8ydw93z.png';
   let devArticles = json2.map((value) => {
@@ -65,7 +60,6 @@ exports.createPages = async ({ actions: { createPage } }) => {
       // time: 0,
     };
   });
-  console.log('gatsby-nodeのqiitaArticlesは ' + qiitaArticles);
 
   createPage({
     path: `/`,
